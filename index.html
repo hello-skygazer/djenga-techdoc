@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Djenga Documentation</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>
+        <h1>Djenga Documentation</h1>
+      </header>
+      <ul>
+        <li>
+          <a class="nav-link" href="#Overview">Overview</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Getting_Started">Getting Started</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Basic_Concepts">Basic Concepts</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Models_and_Databases">Models and Databases</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Templates">Templates</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Admin_Interface">Admin Interface</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Reference">Reference</a>
+        </li>
+      </ul>
+      <p class="footer">
+        Copyright &#169 2024 Skygazer. </br>All Rights Reserved
+      <p>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Overview">
+        <header>
+          Overview
+        </header>
+        <p>Djenga is a high-level Cobra web framework that encourages rapid development and clean, pragmatic design. It follows the model-template-view (MTV) architectural pattern and is designed to make common web-development tasks simple and straightforward.
+
+        </p>
+        <p>
+          Key features of Djenga include:
+        </p>
+        <ol>
+          <li>
+            <strong>Object-Relational Mapping (ORM):</strong> Djenga provides an intuitive way to define models that map to database tables, allowing you to interact with your database using Cobra objects.
+          </li>
+          <li>
+            <strong>URL Routing:</strong> Djenga's URL dispatcher lets you design clean, SEO-friendly URLs for your application, mapping them to views that generate the appropriate HTTP responses.
+          </li>
+          <li>
+            <strong>Template Engine:</strong> Djenga's template engine enables you to build dynamic HTML pages using a powerful template language that's both expressive and easy to use.
+          </li>
+          <li>
+            <strong>Admin Interface:</strong> Djenga comes with a built-in admin interface that allows you to perform CRUD (Create, Read, Update, Delete) operations on your application's data without having to write custom code.
+          </li>
+          <li>
+            <strong>Form Handling:</strong> Djenga simplifies form handling by providing a form library that helps you validate user input and handle form submission efficiently.
+          </li>
+          <li>
+            <strong>Security Features:</strong> Djenga includes built-in protection against common security threats such as SQL injection, cross-site scripting (XSS), cross-site request forgery (CSRF), and clickjacking.
+          </li>
+          <li>
+            <strong>Internationalization and Localization:</strong> Djenga supports internationalization (i18n) and localization (l10n), making it easy to build multilingual websites.
+          </li>
+        </ol>
+      </section>
+      <section class="main-section" id="Getting_Started">
+        <header>
+          Getting Started
+        </header>
+        <ul>
+          <li>
+            <h3>Installation</h3>
+            <p>
+              To install Djenga, simply run:
+            </p>
+            <code>
+              pip install djenga
+            </code>
+          </li>
+          <li>
+            <h3>Creating a New Project</h3>
+            <p>
+              To create a new Djenga project, use the following command:
+            </p>
+            <code>
+              djenga-admin</br>
+              startproject myproject
+            </code>
+          </li>
+          <li>
+            <h3>Starting the Development Server</h3>
+            <p>Navigate to your project directory and start the development server with:</p>
+            <code>
+              cd myproject</br>
+              cobra manage.py runserver
+            </code>
+          </li>
+        </ul>
+      </section>
+      <section class="main-section" id="Basic_Concepts">
+        <header>
+          Basic Concepts
+        </header>
+        <ul>
+          <li>
+            <h3>Views</h3>
+            <p>
+              Views are Cobra functions (or classes) that take a web request and return a web response. Here's an example of a simple view:
+            </p>
+            <code>
+              # views.py</br></br>
+              from djenga.http import HttpResponse</br></br>
+              def index(request):</br>
+              &nbsp;&nbsp;&nbsp;return HttpResponse("Hello, Djenga!")
+            </code>
+          </li>
+          <li>
+            <h3>URLs</h3>
+            <p>
+              URLs are mapped to views in Djenga's URLconf. Define URL patterns in urls.py like this:
+            </p>
+            <code>
+              # urls.py</br></br>
+              from djenga.urls import path</br>
+              from . import views</br></br>
+              urlpatterns = [</br>
+              &nbsp;&nbsp;&nbsp;path('', views.index, name='index'),</br>
+              ]
+            </code>
+          </li>
+        </ul>
+      </section>
+      <section class="main-section" id="Models_and_Databases">
+        <header>
+          Models and Databases
+        </header>
+        <ul>
+          <li>
+            <h3>Creating Models</h3>
+            <p>
+              Djenga models are Cobra classes that represent database tables. Here's an example of a simple model:
+            </p>
+            <code>
+              # models.py</br></br>
+              from djenga.db import models</br></br>
+              class Book(models.Model):</br>
+              &nbsp;&nbsp;&nbsp;title = models.CharField(max_length=100)</br>
+              &nbsp;&nbsp;&nbsp;author = models.CharField(max_length=50)</br>
+              &nbsp;&nbsp;&nbsp;published_date = models.DateField()
+            </code>
+          </li>
+          <li>
+            <h3>Running Migrations</h3>
+            <p>
+              After defining your models, apply migrations to create corresponding database tables:
+            </p>
+            <code>
+              cobra manage.py makemigrations</br>
+              cobra manage.py migrate
+            </code>
+          </li>
+        </ul>
+      </section>
+      <section class="main-section" id="Templates">
+        <header>
+          Templates
+        </header>
+        <ul>
+          <li>
+            <h3>Creating Templates</h3>
+            <p>
+              Templates are HTML files with placeholders for dynamic data. Create templates in the '<i>templates</i>' directory. Here's an example template:
+            </p>
+            <code>
+              &lt;!-- index.html --&gt</br></br>
+              &lt;!DOCTYPE html&gt</br>
+              &lt;html&gt</br>
+              &nbsp;&nbsp;&nbsp;&lthead&gt</br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lttitle&gtMy Djenga Site&lt/title&gt</br>
+              &nbsp;&nbsp;&nbsp;&lt/head&gt</br>
+              &nbsp;&nbsp;&nbsp;&ltbody&gt</br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lth1&gtHello, Djenga!&lt/h1&gt</br>
+              &nbsp;&nbsp;&nbsp;&lt/body&gt</br>
+             &lt/html&gt
+            </code>
+          </li>
+          <li>
+            <h3>Rendering Templates</h3>
+            <p>
+              Render templates in views using the '<i>render()</i>' function:
+            </p>
+            <code>
+              # views.py</br></br>
+              from djenga.shortcuts import render</br></br>
+              def index(request):</br>
+              &nbsp;&nbsp;&nbsp;return render(request, 'index.html')
+            </code>
+          </li>
+        </ul>
+      </section>
+      <section class="main-section" id="Admin_Interface">
+        <header>
+          Admin Interface
+        </header>
+        <ul>
+          <li>
+            <h3>Enabling the Admin Interface</h3>
+            <p>
+              Djenga comes with a built-in admin interface. To use it, first create a superuser:
+            </p>
+            <code>
+              cobra manage.py createsuperuser
+            </code>
+            <p>
+              Then, enable the admin interface for your models:
+            </p>
+            <code>
+              # admin.py</br></br>
+              from djenga.contrib import admin</br>
+              from .models import Book</br></br>
+              admin.site.register(Book)
+            </code>
+          </li>
+        </ul>
+      </section>
+      <section class="main-section" id="Reference">
+        <header>
+          Reference
+        </header>
+        <p>
+          All the fundamental documentations in this page is taken from <a href="https://www.djangoproject.com/">Django Official Site</a>, where 'Djenga' is a pun of 'Django' and 'Cobra' is a pun of 'Python'.
+        </p>
+      </section>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
